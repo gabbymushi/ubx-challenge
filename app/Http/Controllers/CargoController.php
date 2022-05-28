@@ -25,9 +25,13 @@ class CargoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function processBill(Request $request)
     {
-        //
+        $charges = CargoCharge::join('cargos', 'cargo_charges.cargo_id', '=', 'cargos.id')
+            ->where('category', 'wharfage')
+            ->get();
+        
+        return view('cargo.bill', compact('charges'));
     }
 
     /**

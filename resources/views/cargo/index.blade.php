@@ -29,7 +29,7 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col"></div>
                 <div class="col">
-                    <input class="btn btn-success" type="submit" value="Process bill">
+                    <a href="/bill" class="btn btn-success">Process bill</a>
                 </div>
                 <div class="col"></div>
             </div>
