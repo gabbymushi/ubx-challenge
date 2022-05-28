@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('cargos', function (Blueprint $table) {
             $table->id();
             $table->string('cargo_no');
-            $table->enum('type', ['full', 'half']);
+            $table->enum('type', ['FULL', 'HALF']);
             $table->integer('size');
             $table->double('weight');
-            $table->string('remarks');
+            $table->string('remarks')->nullable();
             $table->timestamps();
         });
     }
