@@ -20,4 +20,9 @@ use Illuminate\Support\Facades\Route;
  */
 
 Route::resource('/', CargoController::class);
-Route::get('/bill', [CargoController::class, 'processBill']);
+Route::get('/wharfage', [CargoController::class, 'processWharfageBill']);
+Route::get('/storage', [CargoController::class, 'processStorageBill']);
+Route::get('/destuffing', [CargoController::class, 'processDestuffingBill']);
+Route::get('/lifting', [CargoController::class, 'processLiftingBill']);
+Route::get('/summary', [CargoController::class, 'summary']);
+Route::post('/create-bill', [CargoController::class, 'createBill']);
