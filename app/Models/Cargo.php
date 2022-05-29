@@ -10,4 +10,9 @@ class Cargo extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function charges()
+    {
+        return $this->hasMany(CargoCharge::class);
+    }
 }
