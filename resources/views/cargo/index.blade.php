@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
+
 <head>
     <meta charset="utf-8">
     <title>{{ config('app.name', 'Laravel') }}</title>
@@ -12,7 +13,8 @@
 
 <body>
     <div class="container" style="min-height: 800px;background-color:#CCCC">
-        <section style="margin-top:40px">
+
+        <section style="padding-top:90px">
             <form method="POST" action="/" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
@@ -29,7 +31,7 @@
             <div class="row" style="margin-top: 10px;">
                 <div class="col"></div>
                 <div class="col">
-                    <a href="/bill" class="btn btn-success">Process bill</a>
+                    <a href="/wharfage" class="btn btn-success">Process bill</a>
                 </div>
                 <div class="col"></div>
             </div>

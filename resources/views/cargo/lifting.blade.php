@@ -40,11 +40,10 @@
         background-color: #04AA6D;
     }
 </style>
-
 <head>
     <meta charset="utf-8">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'UBX Cargo') }}</title>
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -53,12 +52,12 @@
 </head>
 
 <body>
-    <div class="container" style="min-height: 900px;background-color:#CCCC">
-        <section style="padSding-top:50px">
-            <div class="row">
+    <div class="container" style="min-height: 800px;background-color:#CCCC">
+        <section style="paddiSng-top:90px">
+        <div class="row">
             <div class="col"></div>
                 <div class="col">
-                    <button class="button button2">1</button>
+                    <button class="button button1">1</button>
                     <p>WHARFAGE SHIP CHARGES</p>
                 </div>
                 <div class="col">
@@ -70,7 +69,7 @@
                     <p>DESTUFFING CHARGES</p>
                 </div>
                 <div class="col">
-                    <button class="button button1">4</button>
+                    <button class="button button2">4</button>
                     <p>LIFTING CHARGES</p>
                 </div>
                 <div class="col">
@@ -83,7 +82,7 @@
                 <div class="row">
                     <div class="col-1"></div>
                     <div class="col">
-                        <table class="table">
+                    <table class="table">
                             <thead class="table-dark">
                                 <tr>
                                     <th><input type="checkbox" onclick="createBill('all')"></th>
@@ -100,7 +99,7 @@
 
                                 @foreach($charges as $key=> $charge)
                                 <tr>
-                                    <td><input type="checkbox" onclick="createBill('{{$charge->id}}','wharfage')"></td>
+                                    <td><input type="checkbox" onclick="createBill('{{$charge->id}}','lifting')"></td>
                                     <td>{{$key+1}}</td>
                                     <td>{{$charge->cargo_no}}</td>
                                     <td>{{$charge->type}}</td>
@@ -170,10 +169,10 @@
                     <div class="col-1"></div>
                 </div>
             </form>
-            <div class="row" style="margin-top: 2px;">
-                <!-- <div class="col-offset-8"></div> -->
-                <div class="col-md-2 offset-md-10">
-                    <a href="/storage" class="btn btn-primary" style="width: 90px;">Next</a>
+            <div class="row" style="margin-top: 5px;">
+                <div class="col-md-3 offset-md-9">
+                    <a href="/destuffing" class="btn btn-warning" style="width: 90px;">PREVIOUS</a>
+                    <a href="/summary" class="btn btn-primary" style="width: 90px;">NEXT</a>
                 </div>
             </div>
         </section>
@@ -181,6 +180,7 @@
 </body>
 
 </html>
+
 <script>
     function createBill(id, category) {
         var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
