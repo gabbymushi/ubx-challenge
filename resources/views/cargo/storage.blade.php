@@ -92,7 +92,9 @@
                                     <th>Cargo size</th>
                                     <th>Weight(Kg)</th>
                                     <th>Remarks</th>
-                                    <th>Charge</th>
+                                    <th>Penalty Days</th>
+                                    <th>Storage</th>
+                                    <th>Electricity</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -106,7 +108,9 @@
                                     <td>{{$charge->size}}</td>
                                     <td>{{$charge->weight}}</td>
                                     <td>{{$charge->remarks}}</td>
+                                    <td>{{$charge->penalty_days}}</td>
                                     <td>{{$charge->amount}}</td>
+                                    <td>{{$charge->eletricity_amount}}</td>
                                 </tr>
                                 @endforeach
                             </tbody>

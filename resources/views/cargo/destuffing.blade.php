@@ -92,7 +92,7 @@
                                     <th>Cargo size</th>
                                     <th>Weight(Kg)</th>
                                     <th>Remarks</th>
-                                    <th>Charge</th>
+                                    <th>Amount</th>
                                 </tr>
                             </thead>
                             <tbody>

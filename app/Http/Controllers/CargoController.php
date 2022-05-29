@@ -67,7 +67,8 @@ class CargoController extends Controller
     private function fetchCharges($category)
     {
         return CargoCharge::join('cargos', 'cargo_charges.cargo_id', '=', 'cargos.id')
-            ->select('cargo_charges.id', 'cargo_no', 'type', 'size', 'weight', 'remarks', 'amount')
+            ->select('cargo_charges.id', 'cargo_no', 'type', 'size', 'weight', 'remarks',
+             'amount','penalty_days','eletricity_amount')
             ->where('category', $category)
             ->get();
     }
