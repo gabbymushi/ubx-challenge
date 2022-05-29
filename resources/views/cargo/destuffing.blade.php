@@ -115,7 +115,7 @@
                             <table class="table">
                                 <tr style="background-color: white;">
                                     <td>USD Exchange Rate</td>
-                                    <td>1230</td>
+                                    <td>{{number_format(1230)}}</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
