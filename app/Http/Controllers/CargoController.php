@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cargo;
+use App\Models\CargoBill;
 use App\Models\CargoCharge;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -25,13 +26,69 @@ class CargoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function processBill(Request $request)
+    public function processWharfageBill(Request $request)
     {
-        $charges = CargoCharge::join('cargos', 'cargo_charges.cargo_id', '=', 'cargos.id')
-            ->where('category', 'wharfage')
-            ->get();
-        
+        $charges = $this->fetchCharges('wharfage');
+
         return view('cargo.bill', compact('charges'));
+    }
+
+    public function processStorageBill(Request $request)
+    {
+        $charges = $this->fetchCharges('storage');
+
+        return view('cargo.storage', compact('charges'));
+    }
+
+    public function processDestuffingBill(Request $request)
+    {
+        $charges = $this->fetchCharges('destuffing');
+
+        return view('cargo.destuffing', compact('charges'));
+    }
+
+    public function processLiftingBill(Request $request)
+    {
+        $charges = $this->fetchCharges('lifting');
+
+        return view('cargo.lifting', compact('charges'));
+    }
+
+    public function summary(Request $request)
+    {
+        $wharfage = $this->fetchBills('wharfage');
+        $storage = $this->fetchBills('storage');
+        $destuffing = $this->fetchBills('destuffing');
+        $lifting = $this->fetchBills('lifting');
+
+        return view('cargo.summary', compact('wharfage', 'storage', 'destuffing', 'lifting'));
+    }
+
+    private function fetchCharges($category)
+    {
+        return CargoCharge::join('cargos', 'cargo_charges.cargo_id', '=', 'cargos.id')
+            ->select('cargo_charges.id', 'cargo_no', 'type', 'size', 'weight', 'remarks', 'amount')
+            ->where('category', $category)
+            ->get();
+    }
+
+    public function createBill(Request $request)
+    {
+        $cargo = CargoBill::create([
+            'charge_id' => $request->charge_id,
+        ]);
+
+        $sum = $this->fetchBills($request->category);
+
+        return view('cargo._summary', ['sum' => $sum]);
+    }
+
+    private function fetchBills($category)
+    {
+        return CargoBill::join('cargo_charges', 'cargo_bills.charge_id', '=',  'cargo_charges.id')
+            ->join('cargos', 'cargo_charges.cargo_id', '=', 'cargos.id')
+            ->where('category', $category)
+            ->sum('cargo_charges.amount');
     }
 
     /**
@@ -47,7 +104,7 @@ class CargoController extends Controller
 
         if ($file) {
             $file = $request->file('cargo_file');
-            // dd($file);
+
             $filename = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
             $tempPath = $file->getRealPath();
